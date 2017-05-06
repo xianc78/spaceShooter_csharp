@@ -30,9 +30,7 @@ namespace spaceShooter
 		public void changePosition()
 		{
 			hitBox.Y = 0;
-  			hitBox.X = rand.Next(0, GraphicsDeviceManager.DefaultBackBufferWidth - hitBox.Width);
+  			hitBox.X = rand.Next(0, graphics.PreferredBackBufferWidth - hitBox.Width);
 		}
-	}
+	}  
 }
-
-//You read the code NOW GO FUCK OFF!!!

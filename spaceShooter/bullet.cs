@@ -29,6 +29,7 @@ namespace spaceShooter
 					if (hitBox.Intersects(game.enemies[i].hitBox))
 					{
 						game.enemies[i].changePosition();
+						this.game.score += 1;
 						this.game.bullets.Remove(this);
 					}
 				}

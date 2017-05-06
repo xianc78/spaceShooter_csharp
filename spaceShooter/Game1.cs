@@ -13,8 +13,6 @@ namespace spaceShooter
 	{
 		GraphicsDeviceManager graphics;
 		SpriteBatch spriteBatch;
-		//Texture2D playerTexture;
-		//Texture2D enemyTexture;
 		Player player;
 		//public Bullet[] bullets = new Bullet[20];
 		public List<Bullet> bullets = new List<Bullet>();
@@ -99,6 +97,7 @@ namespace spaceShooter
 			}
 			base.Update(gameTime);
 			prevState = state;
+			this.Window.Title = "Space Shooter | Score: " + score;
 		}
 
 		/// <summary>
