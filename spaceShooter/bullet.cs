@@ -13,7 +13,7 @@ namespace spaceShooter
 		{
 			this.game = game;
 			this.texture = this.game.Content.Load<Texture2D>("laserRed");
-			this.hitBox = new Rectangle(x, y, 9, 33);
+			this.hitBox = new Rectangle(x, y, this.texture.Width, this.texture.Height );
 			this.changey = -4;
 		}
 		public void update()
@@ -28,6 +28,7 @@ namespace spaceShooter
 				{
 					if (hitBox.Intersects(game.enemies[i].hitBox))
 					{
+						game.enemies[i].explode();
 						game.enemies[i].changePosition();
 						this.game.score += 1;
 						this.game.bullets.Remove(this);

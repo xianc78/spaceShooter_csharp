@@ -9,14 +9,15 @@ namespace spaceShooter
 	/// <summary>
 	/// This is the main type for your game.
 	/// </summary>
-	public class Game1 : Game
+	public class Game1 : Game 
 	{
+		public string mode = "title";
 		GraphicsDeviceManager graphics;
-		SpriteBatch spriteBatch;
+		SpriteBatch spriteBatch; 
 		Player player;
-		//public Bullet[] bullets = new Bullet[20];
 		public List<Bullet> bullets = new List<Bullet>();
 		public List<Enemy> enemies = new List<Enemy>();
+		public List<Explosion> explosions = new List<Explosion>();
 		public int score;
 		KeyboardState prevState;
 		Random rand = new Random();
@@ -75,30 +76,48 @@ namespace spaceShooter
 				Exit();
 #endif
 			KeyboardState state = Keyboard.GetState();
-
-			player.changex = 0;
-			if (state.IsKeyDown(Keys.Left)) {
-				player.changex = -6;
-			}
-			    else if (state.IsKeyDown(Keys.Right)) {
-				player.changex = 6;
-			}
-			if (state.IsKeyDown(Keys.Space) && !prevState.IsKeyDown(Keys.Space)) {
-				player.shoot();
-			}
-			player.update();
-			for (int i = bullets.Count - 1; i >= 0; i--)
+			if (mode == "title")  
 			{
-				bullets[i].update();
+				if (state.IsKeyDown(Keys.Enter))
+				{
+					mode = "game";
+				}
 			}
-			for (int i = enemies.Count - 1; i >= 0; i--)
+			else if (mode == "game")
 			{
-				enemies[i].update();
+				player.changex = 0;
+				if (state.IsKeyDown(Keys.Left))
+				{
+					player.changex = -6;
+				}
+				else if (state.IsKeyDown(Keys.Right))
+				{
+					player.changex = 6;
+				}
+				if (state.IsKeyDown(Keys.Space) && !prevState.IsKeyDown(Keys.Space))
+				{
+					player.shoot();
+				}
+				player.update();
+				for (int i = bullets.Count - 1; i >= 0; i--)
+				{
+					bullets[i].update();
+				}
+				for (int i = enemies.Count - 1; i >= 0; i--)
+				{
+					enemies[i].update();
+				}
+				for (int i = explosions.Count - 1; i >= 0; i--)
+				{
+					explosions[i].update();
+				}
+				this.Window.Title = "Space Shooter | Score: " + score;
 			}
 			base.Update(gameTime);
 			prevState = state;
-			this.Window.Title = "Space Shooter | Score: " + score;
+			
 		}
+
 
 		/// <summary>
 		/// This is called when the game should draw itself.
@@ -108,18 +127,28 @@ namespace spaceShooter
 		{
 			graphics.GraphicsDevice.Clear(Color.Black);
 
-			//TODO: Add your drawing code here
-			spriteBatch.Begin();
-			spriteBatch.Draw(player.texture, destinationRectangle: player.hitBox);
-			foreach (Bullet bullet in bullets)
+			if (mode == "title")
 			{
-				spriteBatch.Draw(bullet.texture, destinationRectangle: bullet.hitBox);
+
 			}
-			foreach (Enemy enemy in enemies)
+			else if (mode == "game")
 			{
-				spriteBatch.Draw(enemy.texture, destinationRectangle: enemy.hitBox);
+				spriteBatch.Begin();
+				spriteBatch.Draw(player.texture, destinationRectangle: player.hitBox);
+				foreach (Bullet bullet in bullets)
+				{
+					spriteBatch.Draw(bullet.texture, destinationRectangle: bullet.hitBox);
+				}
+				foreach (Enemy enemy in enemies)
+				{
+					spriteBatch.Draw(enemy.texture, destinationRectangle: enemy.hitBox);
+				}
+				foreach (Explosion explosion in explosions)
+				{
+					spriteBatch.Draw(explosion.texture, destinationRectangle: explosion.hitBox);
+				}
+				spriteBatch.End();
 			}
-			spriteBatch.End();
 
 			base.Draw(gameTime);
 		}

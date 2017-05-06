@@ -16,7 +16,7 @@ namespace spaceShooter
 			this.game = game;
 			this.graphics = graphics;
 			this.texture = this.game.Content.Load<Texture2D>("enemyShip");
-			hitBox = new Rectangle(x, y, 98, 50);
+			hitBox = new Rectangle(x, y, this.texture.Width, this.texture.Height);
 			this.changey = 4;
 		}
 		public void update()
@@ -31,6 +31,10 @@ namespace spaceShooter
 		{
 			hitBox.Y = 0;
   			hitBox.X = rand.Next(0, graphics.PreferredBackBufferWidth - hitBox.Width);
+		}
+		public void explode()
+		{
+			this.game.explosions.Add(new Explosion(hitBox.X, hitBox.Y, this.game, this.graphics));
 		}
 	}  
 }

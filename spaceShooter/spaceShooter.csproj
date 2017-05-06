@@ -43,6 +43,7 @@
     <Compile Include="player.cs" />
     <Compile Include="bullet.cs" />
     <Compile Include="enemy.cs" />
+    <Compile Include="explosion.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.manifest" />
