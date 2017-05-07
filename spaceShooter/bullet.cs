@@ -1,6 +1,8 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Audio;
+
 namespace spaceShooter
 {
 	public class Bullet
@@ -9,12 +11,15 @@ namespace spaceShooter
 		public Texture2D texture;
 		public Rectangle hitBox;
 		public int changey;
+		SoundEffect laserSound;
 		public Bullet(int x, int y, Game1 game)
 		{
 			this.game = game;
 			this.texture = this.game.Content.Load<Texture2D>("laserRed");
 			this.hitBox = new Rectangle(x, y, this.texture.Width, this.texture.Height );
 			this.changey = -4;
+			laserSound = this.game.Content.Load<SoundEffect>("laser");
+			laserSound.Play();
 		}
 		public void update()
 		{

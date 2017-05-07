@@ -31,7 +31,7 @@ namespace spaceShooter
 			Content.RootDirectory = "Content";
 			graphics.PreferredBackBufferWidth = SCREEN_WIDTH;
 			graphics.PreferredBackBufferHeight = SCREEN_HEIGHT;
-			Window.Title = "Space Shooter";
+
 
 		}
 
@@ -45,6 +45,7 @@ namespace spaceShooter
 		{
 			int nextRand;
 			mode = "title";
+			this.Window.Title = "Space Shooter";
 			player = new Player(0, graphics.PreferredBackBufferHeight - 75, this, this.graphics);
 			for (int i = 0; i < 3; i++)
 			{
