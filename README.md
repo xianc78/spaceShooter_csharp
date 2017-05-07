@@ -12,4 +12,4 @@ Controls
 TODO
 ----
 * Add a title to start screen  and add a gameover screen.
-* Add score text instead of having it on the window title.
+* ~~Add score text instead of having it on the window title.~~

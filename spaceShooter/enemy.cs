@@ -34,7 +34,7 @@ namespace spaceShooter
 		}
 		public void explode()
 		{
-			this.game.explosions.Add(new Explosion(hitBox.X, hitBox.Y, this.game, this.graphics));
+			this.game.explosions.Add(new Explosion(hitBox. X, hitBox.Y, this.game, this.graphics));
 		}
 	}  
 }

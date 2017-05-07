@@ -25,7 +25,7 @@ namespace spaceShooter
 			{
 				if (this.hitBox.Intersects(game.enemies[i].hitBox))
 				{
-					this.game.Exit();
+					this.game.reset();
 				}
 			}
 			if (this.hitBox.Left < 0)

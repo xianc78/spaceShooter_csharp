@@ -11,7 +11,7 @@ namespace spaceShooter
 	/// </summary>
 	public class Game1 : Game 
 	{
-		public string mode = "title";
+		public string mode;
 		GraphicsDeviceManager graphics;
 		SpriteBatch spriteBatch; 
 		Player player;
@@ -23,6 +23,7 @@ namespace spaceShooter
 		Random rand = new Random();
 		public const int SCREEN_WIDTH = 640;
 		public const int SCREEN_HEIGHT = 480;
+		private SpriteFont font;
 
 		public Game1()
 		{
@@ -30,6 +31,8 @@ namespace spaceShooter
 			Content.RootDirectory = "Content";
 			graphics.PreferredBackBufferWidth = SCREEN_WIDTH;
 			graphics.PreferredBackBufferHeight = SCREEN_HEIGHT;
+			Window.Title = "Space Shooter";
+
 		}
 
 		/// <summary>
@@ -41,6 +44,7 @@ namespace spaceShooter
 		protected override void Initialize()
 		{
 			int nextRand;
+			mode = "title";
 			player = new Player(0, graphics.PreferredBackBufferHeight - 75, this, this.graphics);
 			for (int i = 0; i < 3; i++)
 			{
@@ -56,10 +60,9 @@ namespace spaceShooter
 		/// </summary>
 		protected override void LoadContent()
 		{
-			// Create a new SpriteBatch, which can be used to draw textures.
-			spriteBatch = new SpriteBatch(GraphicsDevice);
 
-			//TODO: use this.Content to load your game content here 
+			spriteBatch = new SpriteBatch(GraphicsDevice);
+			font = this.Content.Load<SpriteFont>("font");
 		}
 
 		/// <summary>
@@ -111,7 +114,6 @@ namespace spaceShooter
 				{
 					explosions[i].update();
 				}
-				this.Window.Title = "Space Shooter | Score: " + score;
 			}
 			base.Update(gameTime);
 			prevState = state;
@@ -147,10 +149,18 @@ namespace spaceShooter
 				{
 					spriteBatch.Draw(explosion.texture, destinationRectangle: explosion.hitBox);
 				}
+				spriteBatch.DrawString(font, "Score " + score, new Vector2(0, 0), Color.White);
 				spriteBatch.End();
 			}
 
 			base.Draw(gameTime);
+		}
+		public void reset()
+		{
+			score = 0;
+			bullets.Clear();
+			enemies.Clear();
+			this.Initialize();
 		}
 	}
 }
