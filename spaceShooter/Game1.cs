@@ -24,6 +24,7 @@ namespace spaceShooter
 		public const int SCREEN_WIDTH = 640;
 		public const int SCREEN_HEIGHT = 480;
 		private SpriteFont font;
+		private SpriteFont titleFont;
 
 		public Game1()
 		{
@@ -64,6 +65,7 @@ namespace spaceShooter
 
 			spriteBatch = new SpriteBatch(GraphicsDevice);
 			font = this.Content.Load<SpriteFont>("font");
+			titleFont = this.Content.Load<SpriteFont>("titleFont");
 		}
 
 		/// <summary>
@@ -132,7 +134,11 @@ namespace spaceShooter
 
 			if (mode == "title")
 			{
-
+				spriteBatch.Begin();
+				Vector2 textOrigin = titleFont.MeasureString("C# Space Shooter") / 2;
+				Vector2 textPos = new Vector2(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
+				spriteBatch.DrawString(titleFont, "C# Space Shooter", textPos, Color.White, 0.0f, textOrigin, 1.0f, SpriteEffects.None, 0.5f);
+				spriteBatch.End();
 			}
 			else if (mode == "game")
 			{
@@ -150,7 +156,7 @@ namespace spaceShooter
 				{
 					spriteBatch.Draw(explosion.texture, destinationRectangle: explosion.hitBox);
 				}
-				spriteBatch.DrawString(font, "Score " + score, new Vector2(0, 0), Color.White);
+				spriteBatch.DrawString(font, "Score: " + score, new Vector2(0, 0), Color.White);
 				spriteBatch.End();
 			}
 

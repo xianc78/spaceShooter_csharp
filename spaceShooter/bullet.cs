@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Audio;
 
 namespace spaceShooter
 {
+	//Yeah, technically this is a laser, but fuck it. I am retarded.
 	public class Bullet
 	{
 		Game1 game;
